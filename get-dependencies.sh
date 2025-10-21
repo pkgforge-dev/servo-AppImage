@@ -2,7 +2,7 @@
 
 set -eux
 ARCH="$(uname -m)"
-BINARY="https://github.com/servo/servo/releases/latest/download/servo-x86_64-linux-gnu.tar.gz"
+BINARY="https://github.com/servo/servo/releases/latest/download/servo-$ARCH-linux-gnu.tar.gz"
 EXTRA_PACKAGES="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/get-debloated-pkgs.sh"
 
 echo "Installing dependencies..."
@@ -37,5 +37,3 @@ echo "---------------------------------------------------------------"
 wget --retry-connrefused --tries=30 "$EXTRA_PACKAGES" -O ./get-debloated-pkgs.sh
 chmod +x ./get-debloated-pkgs.sh
 ./get-debloated-pkgs.sh --add-common --prefer-nano
-
-
