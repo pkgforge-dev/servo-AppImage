@@ -12,6 +12,7 @@ pacman -Syu --noconfirm \
 	curl              \
 	git               \
 	gst-plugins-bad   \
+	gst-plugins-good  \
 	libx11            \
 	libxrandr         \
 	libxss            \
