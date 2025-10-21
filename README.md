@@ -3,7 +3,7 @@
 [![GitHub Downloads](https://img.shields.io/github/downloads/pkgforge-dev/servo-AppImage/total?logo=github&label=GitHub%20Downloads)](https://github.com/pkgforge-dev/servo-AppImage/releases/latest)
 [![CI Build Status](https://github.com//pkgforge-dev/servo-AppImage/actions/workflows/blank.yml/badge.svg)](https://github.com/pkgforge-dev/servo-AppImage/releases/latest)
 
-AppImage builds of the [servo browser engine](https://github.com/servo/servo)
+Unofficial AppImage builds of the [servo browser engine](https://github.com/servo/servo)
 
 * [Latest Stable Release](https://github.com/pkgforge-dev/servo-AppImage/releases/latest)
 
