@@ -12,7 +12,7 @@ export DEPLOY_PIPEWIRE=1
 export DEPLOY_GSTREAMER=1
 
 # Deploy dependencies
-./quick-sharun ./AppDir/bin/servoshell
+quick-sharun ./AppDir/bin/servoshell
 
 # Additional changes can be done in between here
 
