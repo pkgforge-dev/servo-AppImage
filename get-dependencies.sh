@@ -1,40 +1,39 @@
 #!/bin/sh
 
-set -eux
-ARCH="$(uname -m)"
-BINARY="https://github.com/servo/servo/releases/latest/download/servo-$ARCH-linux-gnu.tar.gz"
-EXTRA_PACKAGES="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/get-debloated-pkgs.sh"
+set -eu
 
-echo "Installing dependencies..."
+ARCH=$(uname -m)
+
+echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
-	base-devel        \
-	curl              \
-	git               \
 	gst-plugins-bad   \
 	gst-plugins-good  \
-	libx11            \
-	libxrandr         \
-	libxss            \
 	pipewire-audio    \
 	pulseaudio        \
 	pulseaudio-alsa   \
-	wget              \
-	wayland           \
-	xorg-server-xvfb  \
-	zsync
-
-if ! wget --retry-connrefused --tries=30 "$BINARY" -O /tmp/tarball.tar.gz 2>/tmp/download.log; then
-	cat /tmp/download.log
-	exit 1
-fi
-awk -F'/' '/Location:/{print $(NF-1); exit}' /tmp/download.log > ~/version
-mkdir -p ./AppDir/bin
-tar xvf /tmp/tarball.tar.gz
-mv -v ./servo/* ./AppDir/bin
+	wayland
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-wget --retry-connrefused --tries=30 "$EXTRA_PACKAGES" -O ./get-debloated-pkgs.sh
-chmod +x ./get-debloated-pkgs.sh
-./get-debloated-pkgs.sh --add-common --prefer-nano
+get-debloated-pkgs --add-common --prefer-nano
+
+# Comment this out if you need an AUR package
+#make-aur-package PACKAGENAME
+
+echo "Getting binary..."
+echo "---------------------------------------------------------------"
+TARBALL_URL="https://github.com/servo/servo/releases/latest/download/servo-$ARCH-linux-gnu.tar.gz"
+if ! wget --retry-connrefused --tries=30 "$TARBALL_URL" -O /tmp/tarball.tar.gz 2>/tmp/download.log; then
+	cat /tmp/download.log
+	exit 1
+fi
+
+mkdir -p ./AppDir/bin
+tar xvf /tmp/tarball.tar.gz
+mv -v ./servo/* ./AppDir/bin
+cp -v ./AppDir/bin/servo_1024.png          ./AppDir
+cp -v ./AppDir/bin/org.servo.Servo.desktop ./AppDir
+
+awk -F'/' '/Location:/{print $(NF-1); exit}' /tmp/download.log > ~/version
+
