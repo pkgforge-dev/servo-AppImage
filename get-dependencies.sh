@@ -32,8 +32,8 @@ fi
 mkdir -p ./AppDir/bin
 tar xvf /tmp/tarball.tar.gz
 mv -v ./servo/* ./AppDir/bin
-cp -v ./AppDir/bin/servo_1024.png          ./AppDir
-cp -v ./AppDir/bin/org.servo.Servo.desktop ./AppDir
+cp -v ./AppDir/bin/resources/servo_1024.png          ./AppDir
+cp -v ./AppDir/bin/resources/org.servo.Servo.desktop ./AppDir
 
 awk -F'/' '/Location:/{print $(NF-1); exit}' /tmp/download.log > ~/version
 
